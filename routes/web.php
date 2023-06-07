@@ -26,3 +26,20 @@ Route::get('chitietsanpham',[App\http\Controllers\PageController::class,'getDeta
 Route::get('lienhe',[App\http\Controllers\PageController::class,'getContact']);
 
 Route::get('gioithieu',[App\http\Controllers\PageController::class,'getAbout']);
+
+// admin 
+
+Route::get('admin', [App\Http\Controllers\AdminController::class, 'getIndexAdmin']);	
+
+Route::get('/admin-add-form', [App\Http\Controllers\AdminController::class, 'getAdminAdd'])->name('add-product');
+
+Route::post('/admin-add-form', [App\Http\Controllers\AdminController::class, 'postAdminAdd']);	
+
+Route::get('/admin-edit-form/{id}', [App\Http\Controllers\AdminController::class, 'getAdminEdit']);
+
+Route::post('/admin-edit', [App\Http\Controllers\AdminController::class, 'postAdminEdit']);	
+
+Route::post('/admin-delete/{id}', [App\Http\Controllers\AdminController::class, 'postAdminDelete']);	
+
+Route::get('/admin-export', [App\Http\Controllers\AdminController::class, 'exportAdminProduct'])->name('export');
+
