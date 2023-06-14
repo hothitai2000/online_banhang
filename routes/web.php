@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('page',[App\http\Controllers\PageController::class,'getIndex']);
 
 Route::get('loaisanpham/{type}',[App\http\Controllers\PageController::class,'getLoaiSP']);
@@ -26,6 +27,20 @@ Route::get('chitietsanpham',[App\http\Controllers\PageController::class,'getDeta
 Route::get('lienhe',[App\http\Controllers\PageController::class,'getContact']);
 
 Route::get('gioithieu',[App\http\Controllers\PageController::class,'getAbout']);
+
+
+//Đăng Ký//Đăng Nhập
+
+Route::get('/login', function(){
+    return view('users.login');
+});
+Route::post('/login',[App\http\Controllers\UserController::class,'login']);
+Route::get('/logout',[App\http\Controllers\UserController::class,'logout']);
+
+Route::get('/register', function(){
+    return view('users.register');
+});
+Route::post('/register',[App\http\Controllers\UserController::class,'Register']);
 
 // admin 
 

@@ -2,7 +2,9 @@
 										
                     use Illuminate\Http\Request;									
                     use Illuminate\Support\Facades\Route;									
-                    use App\Http\Controllers\APIController;									
+                    use App\Http\Controllers\APIController;			
+                    use App\Http\Controllers\APIControllerPage;	
+                    use App\Http\Controllers\LazadaController;							
                     /*									
                     |--------------------------------------------------------------------------									
                     | API Routes									
@@ -18,16 +20,18 @@
                     return $request->user();									
                     });									
                                                         
-                    // create api									
+                    // create api		
+                    Route::get('/products',[LazadaController::class,'getProduct']);	
+
                     Route::get('/get-product',[APIController::class,'getProducts']);									
-                                                        
-                                                        
-                                                        
+                    
+                    
                     Route::get('/get-product/{id}', [APIController::class,'getOneProduct']);									
                     Route::post('/add-product',[APIController::class,'addProduct']);									
                     Route::delete('/delete-product/{id}',[APIController::class,'deleteProduct']);									
                     Route::put('/edit-product/{id}',[APIController::class,'editProduct']);									
                                                         
-                    Route::post('/upload-image',[APIController::class,'uploadImage']);									
-                                                                            
-          ?>                                                                  
+                    Route::post('/upload-image',[APIController::class,'uploadImage']);	
+
+                    
+                                                                                    

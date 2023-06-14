@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
+
 use Illuminate\Http\Request;
 
-
-class APIController extends Controller
-{					
-	public function getProducts()						
+class APIControllerPage extends Controller
+{
+    public function getProducts()						
 	{						
 	$products = Product::all();						
 	return response()->json($products);						
@@ -25,9 +24,6 @@ class APIController extends Controller
 	$product->image = $request->input('image');						
 	$product->description = $request->input('description');						
 	$product->unit_price = intval($request->input('unit_price'));						
-	$product->promotion_price = intval($request->input('promotion_price'));						
-	$product->unit = $request->input('unit');						
-	$product->new = intval($request->input('new'));						
 	$product->id_type = intval($request->input('id_type'));						
 	$product->save();						
 	return $product;						
@@ -50,10 +46,7 @@ class APIController extends Controller
 	$product->name = $request->input('name');						
 	$product->image = $request->input('image');						
 	$product->description = $request->input('description');						
-	$product->unit_price = intval($request->input('unit_price'));						
-	$product->promotion_price = intval($request->input('promotion_price'));						
-	$product->unit = $request->input('unit');						
-	$product->new = intval($request->input('new'));						
+	$product->unit_price = intval($request->input('unit_price'));																				
 	$product->id_type = intval($request->input('id_type'));						
 							
 	$product->save();						
@@ -71,5 +64,5 @@ class APIController extends Controller
 							
 	return response()->json(["message" => "ok"]);						
 	} else return response()->json(["message" => "false"]);						
-	}						
-	}						
+	}		
+}
