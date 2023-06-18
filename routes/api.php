@@ -33,5 +33,5 @@
                                                         
                     Route::post('/upload-image',[APIController::class,'uploadImage']);	
 
-                    
+           
                                                                                     

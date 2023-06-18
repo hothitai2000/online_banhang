@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\http\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,20 +30,6 @@ Route::get('lienhe',[App\http\Controllers\PageController::class,'getContact']);
 
 Route::get('gioithieu',[App\http\Controllers\PageController::class,'getAbout']);
 
-
-//Đăng Ký//Đăng Nhập
-
-Route::get('/login', function(){
-    return view('users.login');
-});
-Route::post('/login',[App\http\Controllers\UserController::class,'login']);
-Route::get('/logout',[App\http\Controllers\UserController::class,'logout']);
-
-Route::get('/register', function(){
-    return view('users.register');
-});
-Route::post('/register',[App\http\Controllers\UserController::class,'Register']);
-
 // admin 
 
 Route::get('admin', [App\Http\Controllers\AdminController::class, 'getIndexAdmin']);	
@@ -57,4 +45,24 @@ Route::post('/admin-edit', [App\Http\Controllers\AdminController::class, 'postAd
 Route::post('/admin-delete/{id}', [App\Http\Controllers\AdminController::class, 'postAdminDelete']);	
 
 Route::get('/admin-export', [App\Http\Controllers\AdminController::class, 'exportAdminProduct'])->name('export');
+
+//Đăng Ký//Đăng Nhập
+Route::get('/login', function(){
+    return view('users.login');
+});
+Route::post('/login',[App\http\Controllers\UserController::class,'login']);
+Route::get('/logout',[App\http\Controllers\UserController::class,'logout']);
+
+Route::get('/register', function(){
+    return view('users.register');
+});
+Route::post('/register',[App\http\Controllers\UserController::class,'Register']);
+
+///CART
+Route::get('add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('themgiohang');											
+Route::get('del-cart/{id}', [PageController::class, 'getDelItemCart'])->name('xoagiohang');	
+										
+//-------------------------------------CHECKOUT----------------------------------------------------//
+Route::get('check-out',[App\Http\Controllers\PageController::class,'getCheckout'])->name('dathang');
+Route::post('check-out',[App\Http\Controllers\PageController::class,'postCheckout'])->name('dathang');
 

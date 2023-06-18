@@ -97,8 +97,8 @@
                                             </p>
                                         </div>
                                         <div class="single-item-caption">
-                                            <a class="add-to-cart pull-left" href="{{Route('themgiohang,$sp->id)}}"><i class="fa fa-shopping-cart"></i></a>
-                                            <a class="beta-btn primary" href="{{Route('chitietsanpham,$sp->id)}}">">Details <i class="fa fa-chevron-right"></i></a>
+                                            <a class="add-to-cart pull-left" href="{{url('themgiohang',$sp->id)}}"><i class="fa fa-shopping-cart"></i></a>
+                                            <a class="beta-btn primary"      href="{{url('chitietsanpham',$sp->id)}}">Details <i class="fa fa-chevron-right"></i></a>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>

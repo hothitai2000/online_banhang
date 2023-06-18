@@ -23,7 +23,6 @@ class UserController extends Controller
     if (Auth::attempt($login)){
       $user=Auth::user();
       Session::put('user',$user);
-
       echo '<script>alert("Đăng nhập thành công.");window.location.assign("page");</script>';
     }else
     {
