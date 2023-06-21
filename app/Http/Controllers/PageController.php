@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\WishlistController;
 use App\Models\Slide;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Customer;
-use App\Models\Wishlists;
+// use App\Models\Wishlists;
 use App\Models\Cart;
 use Session;
 use Illuminate\Http\Request;
@@ -121,18 +121,17 @@ class PageController extends Controller
 
 		$customer->save();
           
-        
-        $bill = new Bill;
-		$bill->id_customer = $customer->id;
-		$bill->date_order = date('Y-m-d');
-		$bill->total = $cart->totalPrice;
-		$bill->payment = $req->payment_method;
-		if(isset($req->notes)){
-			$bill->note = $req->notes;
-		}else{
-			$bill->note = "Không có ghi chú gì";
-		}
-		$bill->save();
+        $bill = new bill();															
+        $bill->id_customer = $customer->id;															
+        $bill->date_order = date('Y-m-d');															
+                                                                
+        $bill->payment = $req->payment_method;															
+        if (isset($req->notes)) {															
+        $bill->note = $req->notes;															
+        } else {															
+        $bill->note = "Không có ghi chú gì";															
+        }															
+        $bill->save();	
 
         // foreach($cart->item as $key =>$value){
         //     $bill_detail= new BillDetail;
@@ -141,13 +140,15 @@ class PageController extends Controller
         //     $bill_detail->quantity=$value['qty'];
         //     $bill_detail->unit_price=$value['price']/ $value['qty'];
         // }
-        foreach($cart->items as $key =>$value){
-			$bill_detail = new BillDetail;
-			$bill_detail->id_bill = $bill->id;
-			$bill_detail->id_product = $key;
-			$bill_detail->quantity = $value['qty'];
-			$bill_detail->unit_price = $value['price'] / $value['qty'];
-		}
+        // foreach ($cart->items as $key => $value) {															
+        //     $bill_detail = new BillDetail;															
+        //     $bill_detail->id_bill = $bill->id;															
+        //     $bill_detail->id_product = $key; //$value['item']['id'];															
+        //     $bill_detail->quantity = $value['qty'];															
+        //     $bill_detail->unit_price = $value['price'] / $value['qty'];															
+        //     $bill_detail->save();															
+        //     }															
+            
 
         Session::forget('cart');															
         $wishlists = wishlist::where('id_user', Session::get('user')->id)->get();															
@@ -156,6 +157,7 @@ class PageController extends Controller
             $element->delete();															
           }															
         }	;
+        return redirect('page')->withSuccess("Thành công");
     
 }
 }

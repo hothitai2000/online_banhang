@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\Console\Input\Input;
 use App\Models\User;
+
 use Validator;
 use App\Http\Requests;
 // namespace App\Http\Controllers;
