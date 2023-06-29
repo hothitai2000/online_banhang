@@ -134,22 +134,6 @@ class PageController extends Controller
         }															
         $bill->save();	
 
-        // foreach($cart->item as $key =>$value){
-        //     $bill_detail= new BillDetail;
-        //     $bill_detail->id_bill=$bill->id;
-        //     $bill_detail->id_product=$key;
-        //     $bill_detail->quantity=$value['qty'];
-        //     $bill_detail->unit_price=$value['price']/ $value['qty'];
-        // }
-        // foreach ($cart->items as $key => $value) {															
-        //     $bill_detail = new BillDetail;															
-        //     $bill_detail->id_bill = $bill->id;															
-        //     $bill_detail->id_product = $key; //$value['item']['id'];															
-        //     $bill_detail->quantity = $value['qty'];															
-        //     $bill_detail->unit_price = $value['price'] / $value['qty'];															
-        //     $bill_detail->save();															
-        //     }				
-        // Session::forget('cart');
 
         // $wishlists = wishlist::where('id_user', Session::get('user')->id)->get();															
         // if (isset($wishlists)) {															

@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="dropdown">
-                    <button  class="btn btn-success" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                    <button  class="btn btn-primary" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
                       Danhh sách yêu thích ({{$quantity}})
                     </button>
                     <ul class="dropdown-menu">

@@ -58,7 +58,8 @@ class AppServiceProvider extends ServiceProvider
                     ->where('user_id', $user_id);
             })
             ->get();
-
+            
+            
             $quantity = Wishlists::query()->count();
             $view ->with(['wishlist' => $wishlist , 'quantity' => $quantity]);
         }
