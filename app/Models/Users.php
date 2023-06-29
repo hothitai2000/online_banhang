@@ -9,4 +9,8 @@ class users extends Model
 {
     use HasFactory;
     protected $table='user';
+
+    public function wishlist(){
+        return $this->hasMany(wishlist::class);
+    }
 }

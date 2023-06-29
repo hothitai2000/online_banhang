@@ -42,14 +42,14 @@
                     @if (Session::has('cart'))
                         <div class="cart">
                             <div class="beta-select">
-                                <i class="fa fa-shopping-cart"></i> Giỏ hàng (@if (Session::has('cart'))
+                                <i class="fa fa-shopping-cart"></i> Add To Card(@if (Session::has('cart'))
                                     {{ Session('cart')->totalQty }}
                                 @else
                                     Trong
-                                @endif) <i class="fa fa-chevron-down"></i>
+                                @endif) <i class="fa fa-chevron-down"></i>      
                             </div>
+                            
                             <div class="beta-dropdown cart-body">
-
                                 @foreach ($product_cart as $Product)
                                     <div class="cart-item" id="cart-item{{ $Product['item']['id'] }}">
                                         <a class="cart-item-delete" href="del-cart/{{ $Product['item']['id'] }}"
@@ -84,6 +84,26 @@
                         </div> <!-- .cart -->
                     @endif
                 </div>
+
+                <div class="dropdown">
+                    <button  class="btn btn-success" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                      Danhh sách yêu thích ({{$quantity}})
+                    </button>
+                    <ul class="dropdown-menu">
+                      @foreach($wishlist as $item)
+                            <div class="cart-item" id="cart-item{{ $item->id }}">
+                                <div class="media">
+                                    <a class="pull-left" href="#"><img
+                                            src="source/image/product/{{ $item->image }}"
+                                            alt=""></a>
+                                    <div class="media-body">
+                                        <span class="cart-item-title">{{ $item->name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </ul>
+                </div>  
             </div>
             <div class="clearfix"></div>
         </div> <!-- .container -->

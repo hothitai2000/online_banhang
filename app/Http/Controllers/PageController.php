@@ -8,6 +8,7 @@ use App\Models\ProductType;
 use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Customer;
+
 // use App\Models\Wishlists;
 use App\Models\Cart;
 use Session;
@@ -17,7 +18,7 @@ class PageController extends Controller
 {
     public function getIndex(){
         $slide = Slide::all();
-        $new_product = Product::where('new',1)->paginate(8);	
+        $new_product = Product::where('new',1)->paginate(4);	
         $sanpham_khuyenmai = Product::where('promotion_price','<>',0)->paginate(8);	
         return view('page.trangchu',compact('slide','new_product','sanpham_khuyenmai'));
         
@@ -59,12 +60,12 @@ class PageController extends Controller
     public function getAddToCart(Request $req, $id)
     {
         if (Session::has('user')) {
-            if (Product::find($id)) {
+            if (Product::find($id)){
                 $product = Product::find($id);
                 $oldCart = Session('cart') ? Session::get('cart') : null;
                 $cart = new Cart($oldCart);
                 $cart->add($product, $id);
-                $req->session()->put('cart', $cart);
+                $req->session()->put('cart', $cart); //dùng pthuwcs put để lưu ssanr phẩm
                 return redirect()->back();
             } else {
                 return '<script>alert("Không tìm thấy sản phẩm này.");window.location.assign("/");</script>';
@@ -147,17 +148,17 @@ class PageController extends Controller
         //     $bill_detail->quantity = $value['qty'];															
         //     $bill_detail->unit_price = $value['price'] / $value['qty'];															
         //     $bill_detail->save();															
-        //     }															
-            
+        //     }				
+        // Session::forget('cart');
 
-        Session::forget('cart');															
-        $wishlists = wishlist::where('id_user', Session::get('user')->id)->get();															
-        if (isset($wishlists)) {															
-          foreach ($wishlists as $element) {															
-            $element->delete();															
-          }															
-        }	;
-        return redirect('page')->withSuccess("Thành công");
+        // $wishlists = wishlist::where('id_user', Session::get('user')->id)->get();															
+        // if (isset($wishlists)) {															
+        //   foreach ($wishlists as $element) {															
+        //     $element->delete();															
+        //   }															
+        // }	;
+        // return redirect('page')->withSuccess("Thành công");
     
 }
+
 }

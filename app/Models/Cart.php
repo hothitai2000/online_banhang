@@ -8,11 +8,12 @@ class Cart extends Model
 {
     use HasFactory;
 
-    public $items = null; 
+    public $items = null; //các thuộc tính
     public $totalQty = 0;
     public $totalPrice =0;
 
-    public function __construct($oldCart)
+    public function __construct($oldCart)//neus các có item thì cộng dồn số lượng, kiểm tra cart có tiền tại không
+
     {
         if($oldCart){
             $this->items = $oldCart->items;
@@ -26,7 +27,7 @@ class Cart extends Model
         if($item->promotion_price == 0){
             $giohang = [
                 'qty' => 0,
-                'price' => $item->unit_price,
+                'price' => $item->unit_price,  //lấy từng phần tử mảng để xuwrr lý
                 'item' => $item
             ];
             if($this->items){
@@ -34,7 +35,7 @@ class Cart extends Model
                     $giohang = $this->items[$id];
                 }
             }
-            $giohang['qty'] = $giohang['qty'] + $qty;
+            $giohang['qty'] = $giohang['qty'] + $qty;   // lây từng thuộc tinh trong mảng
             $giohang['price'] = $item->unit_price * $giohang['qty'];
             $this->items[$id] = $giohang;
             $this->totalQty = $this->totalQty + $qty;
@@ -54,7 +55,7 @@ class Cart extends Model
         }
     }
      //xóa 1                                 
-    public function reduceByOne($id)
+    public function reduceByOne($id)   
     {
         $this->items[$id]['qty']--; // Giảm số lượng một đơn vị
         $this->items[$id]['price'] = $this->items[$id]['item']['price']; //* $this->items[$id]['qty']; // Cập nhật giá tiền dựa trên số lượng mới
@@ -66,7 +67,7 @@ class Cart extends Model
         }
     }
     // xóa nhiều
-    public function removeItem($id)
+    public function removeItem($id) ///xóa nhiều số lượng tirng 1item
     {
         $this->totalQty -= $this->items[$id]['qty']; // Giảm tổng số lượng bằng số lượng của mặt hàng sẽ bị xóa
         $this->totalPrice -= $this->items[$id]['price']; // Giảm tổng giá tiền bằng giá tiền của mặt hàng sẽ bị xóa
@@ -74,3 +75,6 @@ class Cart extends Model
     }
 
 }
+
+///xóa số lượng
+///2. remove item ra khỏi giỏ hàng

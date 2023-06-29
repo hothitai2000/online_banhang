@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\http\UserController;
@@ -14,6 +14,11 @@ use App\http\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +55,7 @@ Route::get('/admin-export', [App\Http\Controllers\AdminController::class, 'expor
 Route::get('/login', function(){
     return view('users.login');
 });
+
 Route::post('/login',[App\http\Controllers\UserController::class,'login']);
 Route::get('/logout',[App\http\Controllers\UserController::class,'logout']);
 
@@ -66,3 +72,8 @@ Route::get('del-cart/{id}', [PageController::class, 'getDelItemCart'])->name('xo
 Route::get('check-out',[App\Http\Controllers\PageController::class,'getCheckout'])->name('dathang');
 Route::post('check-out',[App\Http\Controllers\PageController::class,'postCheckout'])->name('dathang');
 
+
+                /////WISHLIST
+Route::post('wishlist/add/{id}', [WishListController::class, 'addToWishList'])->name('wishlist.add');
+
+// Route::post('wishlist/remove/{id}', [WishListController::class, 'removeFromWishList'])->name('wishlist.remove');								
